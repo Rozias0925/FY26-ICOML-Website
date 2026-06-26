@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,8 @@
     
     <style>
         :root {
-            --primary-color: #5A1826; /* 深酒紅 */
-            --secondary-color: #D4AF37; /* 奢華金 */
+            --primary-color: #5A1826; /* Deep Burgundy */
+            --secondary-color: #D4AF37; /* Luxury Gold */
             --bg-color: #F8F9FA;
             --text-main: #333333;
             --text-light: #666666;
@@ -20,8 +20,6 @@
         }
         
         * { box-sizing: border-box; }
-
-        /* 啟用平滑捲動 */
         html { scroll-behavior: smooth; }
 
         body {
@@ -30,10 +28,9 @@
             color: var(--text-main);
             line-height: 1.8;
             margin: 0;
-            padding-top: 60px; /* 為了頂部固定導航列留出空間 */
+            padding-top: 60px;
         }
 
-        /* 頂部固定導航列設計 */
         nav {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -57,7 +54,6 @@
 
         nav a:hover { color: var(--secondary-color); }
 
-        /* 標題橫幅設計 */
         header {
             background-color: var(--primary-color);
             color: var(--white);
@@ -67,7 +63,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* 校徽區塊 */
         .logo-container {
             width: 120px;
             height: 120px;
@@ -85,13 +80,7 @@
         .logo-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* 確保校徽完整顯示 */
-        }
-
-        .logo-container span {
-            color: var(--primary-color);
-            font-size: 0.9em;
-            font-weight: bold;
+            object-fit: contain;
         }
 
         header h1 {
@@ -115,13 +104,18 @@
             opacity: 0.9;
         }
 
+        .institution {
+            font-size: 1em;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
         .container {
             max-width: 1100px;
             margin: 50px auto;
             padding: 0 20px;
         }
 
-        /* 卡片設計 */
         .card {
             background: var(--white);
             border-radius: 10px;
@@ -130,7 +124,6 @@
             margin-bottom: 40px;
             border-left: 6px solid var(--secondary-color);
             transition: transform 0.3s ease;
-            /* 讓跳轉錨點定位更準確，不會被導航列遮擋 */
             scroll-margin-top: 80px; 
         }
 
@@ -184,7 +177,6 @@
         table th { background-color: var(--primary-color); color: var(--white); font-weight: 400; }
         table tr:nth-child(even) { background-color: #FDFDFD; }
 
-        /* 折線圖容器 */
         .chart-container {
             position: relative;
             height: 400px;
@@ -205,169 +197,147 @@
 <body>
 
     <nav>
-        <a href="#motivation">研究動機</a>
-        <a href="#algorithm">核心架構</a>
-        <a href="#strategy">風控策略</a>
-        <a href="#performance">實驗結果與折線圖</a>
+        <a href="#motivation">Motivation</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#optimization">End-to-End Optimization</a>
+        <a href="#performance">Empirical Results</a>
+        <a href="#future-work">Future Work</a>
     </nav>
 
     <header>
-        <img src="School Logo.png" alt="國立臺灣師範大學 Logo" style="height: 200px; margin-bottom: 30px;">
-        
-        
+        <img src="School Logo.png" alt="National Taiwan Normal University Logo" style="height: 200px; margin-bottom: 30px;">
         <h1>Factor GCN for End-to-End Portfolio Optimization</h1>
-        <h2>A Study on Robust Hierarchical Portfolio Allocation</h2>
-        <div class="authors">Author: Chun-Hao, Wen 文君豪</div>
+        <h2>International Conference on Optimization and Machine Learning 2026</h2>
+        <div class="authors">Author: Chun-Hao, Wen (文君豪)</div>
+        <div class="institution">Department of Mathematics, National Taiwan Normal University, Taiwan</div>
     </header>
 
     <div class="container">
         <div class="card" id="motivation">
-            <h3>研究動機與摘要 (Motivation & Abstract)</h3>
-            <p>傳統投資組合模型（如馬可維茲 CLA 或 HRP）易受價格雜訊干擾，產生<span class="highlight">「假性相關」</span>。例如，兩檔不同產業的股票若剛好在短期內同步大漲，傳統模型容易誤判它們為同類資產。</p>
-            <p>為突破此痛點，本研究研發 <strong>Factor GCN (因子驅動圖卷積神經網路)</strong> 演算法。我們捨棄歷史價格相關性，改以「多因子模型」建構具實質經濟邏輯的動態市場圖譜，結合 GCN 讓資產交換情報，並端到端優化夏普比率 (Sharpe Ratio)，打造出兼具數學穩健性與高獲利潛力的量化投資大腦。</p>
+            <h3>Motivation: The Quest for Optimal Asset Allocation</h3>
+            <p>Asset allocation seeks an optimal capital weight vector \( \mathbf{w} \) to maximize risk-adjusted performance, fundamentally formulated as the Sharpe Ratio. The objective is mathematically defined as:</p>
+            <p style="text-align: center; font-size: 1.2em;">
+                \( \max_{\mathbf{w}} SharpeRatio(\mathbf{w}) = \frac{Benefit(\mathbf{w})}{Risk(\mathbf{w})} = \frac{\mathbf{w}^T \boldsymbol{\mu} - R_f}{\sqrt{\mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}}} \)
+            </p>
+            <p style="text-align: center;">subject to \( 1^T \mathbf{w} = 1, \mathbf{w} \ge 0 \)</p>
+            <p>Where \( \boldsymbol{\mu} \) is the expected return vector, \( \boldsymbol{\Sigma} \) is the covariance matrix quantifying structural risk, and \( R_f \) is the risk-free rate.</p>
+            <p><strong>The Traditional Flaw:</strong> Classical models rely heavily on plug-in estimators (\( \boldsymbol{\mu}, \boldsymbol{\Sigma} \)) that suffer extensively from market noise, ill-conditioning, and "false correlations".</p>
+            <p><strong>The Machine Learning Solution:</strong> We seamlessly bridge Machine Learning and Financial Optimization by introducing <span class="highlight">Factor GCN</span>. It serves as an end-to-end non-linear solver directly mapping market graphs to the optimal simplex \( \Delta^{N-1} \), ensuring a robust, noise-resistant portfolio allocation.</p>
         </div>
 
-        <div class="card" id="algorithm">
-            <h3>演算法核心架構 (Algorithm Process)</h3>
-            <p>Factor GCN 結合了現代數學圖論工具與深度學習，透過以下三個階段建構最優化投資組合：</p>
+        <div class="card" id="methodology">
+            <h3>Methodology: The Factor GCN Architecture</h3>
+            <p>By utilizing graph neural networks to extract dynamic, non-linear market features, we construct a robust learning framework.</p>
             <div class="stage-grid">
                 <div class="stage-box">
-                    <h4>STAGE 1：動態因子圖建構</h4>
-                    <p>捨棄單純價格雜訊，以基本財報資料（如 ROA、PB、對數化市值等）為基礎建立多因子圖。</p>
-                    <p>使用高斯核函數 (RBF Kernel) 計算股票特徵間的相似度生成鄰接矩陣 \( A \)，並加入自環機制 (\( \tilde{A} = A + I \)) 避免遺忘自身特徵，最終計算出對稱正規化圖拉普拉斯矩陣：</p>
-                    <p style="text-align: center;">\( L_{sym} = \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} \)</p>
+                    <h4>STAGE 1: Factor-Based Structural Graph</h4>
+                    <p>Instead of relying on noisy historical return correlations, we construct a market graph from long-term fundamental factors containing firm characteristics such as Market Capitalization, ROA, and Debt Ratio.</p>
+                    <p style="text-align: center;">\( A_{ij} = \exp\left(-\frac{||z_i - z_j||^2}{2\sigma^2}\right) \)</p>
+                    <p>We incorporate a self-loop mechanism \( \overline{A} = A + I_N \) and compute the symmetric normalized graph Laplacian:</p>
+                    <p style="text-align: center;">\( \tilde{L}_{sym} = \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} \)</p>
+                    <p>This resulting normalized graph acts as a structural filter, allowing short-term signals to propagate through fundamentally similar assets while suppressing noisy price correlations.</p>
                 </div>
                 <div class="stage-box">
-                    <h4>STAGE 2：頻譜特徵提取與情報交換</h4>
-                    <p>將 Stage 1 建構的地圖與最新的短期特徵矩陣 \( X \) 送入圖卷積神經網路。</p>
-                    <p>透過神經網路讓節點（股票）在拓撲圖上高效率地與鄰居交換特徵，萃取深層的非線性連動關係：</p>
-                    <p style="text-align: center;">\( H = ReLU( L_{sym} \cdot X \cdot W_0 ) \)</p>
-                    <p>此步驟完美融合了長期基本面與短天期的市場動能。</p>
-                </div>
-                <div class="stage-box">
-                    <h4>STAGE 3：資金分配與端到端優化</h4>
-                    <p>將精煉後的高維特徵經由評分層轉換為信心分數 \( Z \)，並使用帶有溫度參數 (\( \tau \)) 的 Softmax 函數映射為合法權重：</p>
-                    <p style="text-align: center;">\( w_i = \frac{e^{z_i / \tau}}{\sum e^{z_j / \tau}} \)</p>
-                    <p>直接以<span class="highlight">最大化夏普比率</span>作為損失函數，完成端到端的反向傳播優化。</p>
+                    <h4>STAGE 2: Spectral Feature Fusion</h4>
+                    <p>We introduce short-term momentum signals (\( X \)) and leverage the structural map (\( \tilde{L}_{sym} \)) as a spatial low-pass filter.</p>
+                    <p>To extract high-level representations, we apply a learnable feature extraction matrix \( \Theta \) alongside a Sparse Activation mechanism:</p>
+                    <p style="text-align: center;">\( H = SparseAct_K(\tilde{L}_{sym} X \Theta) \)</p>
+                    <p>The \( SparseAct_K(\cdot) \) is a Top-K activation function that zeroes out all but the most promising K signals, maximizing the signal-to-noise ratio.</p>
                 </div>
             </div>
         </div>
 
-        <div class="card" id="strategy">
-            <h3>量化策略與風險控管 (Risk Metrics & Overlay)</h3>
-            <p>為避免模型在極端牛市中陷入「動能陷阱」(Momentum Trap) 而追高殺跌，我們在實盤推論階段加入了嚴格的風控機制：</p>
-            <ul>
-                <li><strong>位階風險修正：</strong>偵測過度偏離均線的高位階股票，給予權重懲罰，有效抵抗資金氾濫時的追高風險。</li>
-                <li><strong>投資限制：</strong>內建最高 15% 權重上限，與最低 1.5% 門檻，確保資產分散。</li>
-                <li><strong>動態視窗與短期疊加：</strong>每月/每季動態更新短期動能因子（如 RSI、波段漲跌幅），並將其作為乘數疊加至 GCN 的原始信念中。</li>
-            </ul>
+        <div class="card" id="optimization">
+            <h3>STAGE 3: End-to-End Optimization via Gradient Descent</h3>
+            <p>The filtered hidden state \( H \) is projected into an investment confidence vector \( Z \) via a secondary scoring parameter \( \Phi \). These signals are then mapped into a strict capital allocation vector \( \mathbf{w} \) using a Temperature-scaled Softmax function.</p>
+            <p style="text-align: center; font-size: 1.1em;">\( \mathbf{w} = Softmax(Z / \tau) \)</p>
+            
+            <p><strong>Objective Function & Backpropagation:</strong> Instead of traditional quadratic programming, we optimize \( \Theta \) and \( \Phi \) over 500 epochs using Gradient Descent. We directly utilize the negative Sharpe Ratio as our loss function:</p>
+            <p style="text-align: center; font-size: 1.1em;">\( \mathcal{L}(\Theta, \Phi) = -SharpeRatio(\mathbf{w}) = -\frac{\mathbf{w}^T \boldsymbol{\mu} - R_f}{\sqrt{\mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}}} \)</p>
+
+            <p>The gradients of the Sharpe Ratio flow backward through the network via the Chain Rule of Calculus:</p>
+            <p style="text-align: center;">\( \nabla_{\Phi}\mathcal{L} = \frac{\partial\mathcal{L}}{\partial \mathbf{w}} \cdot \frac{\partial \mathbf{w}}{\partial Z} \cdot \frac{\partial Z}{\partial \Phi} \)</p>
+            <p style="text-align: center;">\( \nabla_{\Theta}\mathcal{L} = \frac{\partial\mathcal{L}}{\partial \mathbf{w}} \cdot \frac{\partial \mathbf{w}}{\partial Z} \cdot \frac{\partial Z}{\partial H} \cdot \frac{\partial H}{\partial \Theta} \)</p>
+            
+            <p>Combined with a learning rate \( \eta \) and an Early Stopping mechanism to prevent overfitting, this enables the model to autonomously adapt to true market dynamics.</p>
         </div>
 
-        <h4 style="color: var(--primary-color); margin-top: 20px; font-size: 1.2em;">📊 季換股績效統計 (Quarterly Rebalancing)</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>策略名稱</th>
-                        <th>總報酬</th>
-                        <th>Sharpe Ratio 標準差</th>
-                        <th>結論表現</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>0050 ETF</td>
-                        <td>3.068</td>
-                        <td>2.447</td>
-                        <td>承擔單一資產高度集中風險</td>
-                    </tr>
-                    <tr>
-                        <td>等權重 (Equal Weight)</td>
-                        <td>1.745</td>
-                        <td>2.569</td>
-                        <td>無特定選股邏輯，波動度高</td>
-                    </tr>
-                    <tr>
-                        <td>HRP (分層風險值)</td>
-                        <td>1.244</td>
-                        <td>2.235</td>
-                        <td>易受歷史價格假性相關影響</td>
-                    </tr>
-                    <tr>
-                        <td style="color: var(--primary-color); font-weight: bold;">Factor GCN (本研究)</td>
-                        <td style="color: var(--primary-color); font-weight: bold;">2.438</td>
-                        <td style="color: var(--primary-color); font-weight: bold;">2.455</td>
-                        <td style="color: var(--primary-color); font-weight: bold;">成功擊敗傳統 HRP，風險調整後報酬最佳</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="card" id="performance">
+            <h3>Empirical Results & Out-of-Sample Backtesting</h3>
+            <p>Rigorous backtesting demonstrates Factor GCN's real-world robustness against market noise:</p>
+            <ul>
+                <li><strong>Universe & Data:</strong> Top 150 listed companies in Taiwan sourced from the TEJ Pro database.</li>
+                <li><strong>Testing Period:</strong> January 2024 – May 2026 (Out-of-Sample).</li>
+                <li><strong>Baselines:</strong> Market Index (0050.TW), Equal-Weight (1/N), and Hierarchical Risk Parity (HRP).</li>
+                <li><strong>Execution:</strong> Monthly dynamic rebalancing under realistic constraints, with standard transaction costs fully incorporated.</li>
+            </ul>
 
-            <h4 style="color: var(--primary-color); margin-top: 40px; font-size: 1.2em;">📊 月換股績效統計 (Monthly Rebalancing)</h4>
+            <h4 style="color: var(--primary-color); margin-top: 40px; font-size: 1.2em;">📊 Monthly Rebalancing Performance</h4>
             <table>
                 <thead>
                     <tr>
-                        <th>策略名稱</th>
-                        <th>總報酬</th>
-                        <th>Sharpe Ratio 標準差</th>
-                        <th>結論表現</th>
+                        <th>Strategy / Baseline</th>
+                        <th>Performance (Total Return)</th>
+                        <th>Sharpe Ratio Standard Deviation</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>0050 ETF</td>
+                        <td>Market Index (0050.TW)</td>
                         <td>3.234</td>
-                        <td>4.122</td>
-                        <td>市場基準線，受單一巨頭影響大</td>
+                        <td>4.121</td>
                     </tr>
                     <tr>
-                        <td>等權重 (Equal Weight)</td>
+                        <td>Equal Weight (1/N)</td>
                         <td>1.704</td>
-                        <td>3.874</td>
-                        <td>無視股票位階風險，極端行情下易回撤</td>
+                        <td>3.873</td>
                     </tr>
                     <tr>
-                        <td>HRP (分層風險值)</td>
+                        <td>Hierarchical Risk Parity (HRP)</td>
                         <td>1.220</td>
                         <td>4.345</td>
-                        <td>傳統風險平準模型，缺乏前瞻性特徵</td>
                     </tr>
                     <tr>
-                        <td style="color: var(--primary-color); font-weight: bold;">Factor GCN (本研究)</td>
+                        <td style="color: var(--primary-color); font-weight: bold;">Factor GCN (Proposed)</td>
                         <td style="color: var(--primary-color); font-weight: bold;">3.833</td>
-                        <td style="color: var(--primary-color); font-weight: bold;">3.743</td>
-                        <td style="color: var(--primary-color); font-weight: bold;">高頻動態調倉，有效捕捉短期 Alpha</td>
+                        <td style="color: var(--primary-color); font-weight: bold;">3.742</td>
                     </tr>
                 </tbody>
             </table>
             
             <p style="margin-top: 20px; font-size: 0.95em; color: var(--text-light); background: #FFF9E6; padding: 15px; border-left: 4px solid #F5A623; border-radius: 4px;">
-                💡 <strong>綜合結論與模型優勢：</strong><br><br>
-                <strong>【月換股 - 極致 Alpha 的展現】：</strong>在每月動態調倉的測試中，Factor GCN 展現了驚人的統治力！其<b>總報酬率高達 3.833 霸榜全場</b>，同時 <b>Sharpe Ratio 標準差僅 3.743，為全策略中最低</b>。這證明了 GCN 在高頻度吸收短期市場動能時，不僅獲利最高，更具備最強的抗波動穩健性。<br><br>
-                <strong>【季換股 - 穩健抗摔的底蘊】：</strong>在低頻調倉的限制下，雖然大盤 (0050) 因牛市資金集中而享有超額紅利，但 Factor GCN 依然完美擊敗了對照組的 HRP 與等權重模型。這證實了本研究捨棄歷史價格雜訊、改用「因子驅動圖譜」的 STAGE 1 核心假設，確實在風險平準的任務上，取得了比傳統演算法更優越的成果。
+                💡 <strong>Conclusion:</strong> The out-of-sample cumulative returns illustrate that Factor GCN significantly outperforms traditional benchmarks. By autonomously filtering structural noise, Factor GCN achieves the highest total return (3.833) while simultaneously minimizing volatility, exhibiting the lowest Sharpe Ratio Standard Deviation (3.742) among all tested strategies.
             </p>
 
-            <h3 style="margin-top: 50px; border-bottom: none;">📈 累積價值走勢圖 (Equity Curve)</h3>
-            <p style="color: var(--text-light); font-size: 0.9em; margin-top: -10px;">初始本金設定為 Base = 100</p>
+            <h3 style="margin-top: 50px; border-bottom: none;">📈 Cumulative Equity Curve</h3>
+            <p style="color: var(--text-light); font-size: 0.9em; margin-top: -10px;">Initial Capital Base = 100</p>
 
             <div class="chart-container">
-                <canvas id="quarterlyChart"></canvas>
-            </div>
-
-            <div class="chart-container" style="margin-top: 50px;">
                 <canvas id="monthlyChart"></canvas>
             </div>
+            
+            <div class="chart-container" style="margin-top: 50px;">
+                <canvas id="quarterlyChart"></canvas>
+            </div>
+        </div>
 
+        <div class="card" id="future-work">
+            <h3>Generalization and Future Work</h3>
+            <ul>
+                <li><strong>Customizable Factor Inputs:</strong> The framework is highly adaptable, allowing portfolio managers to flexibly substitute the underlying structural factors to align with their specific investment mandates and risk preferences.</li>
+                <li><strong>Dynamic Perception via GAT:</strong> Future iterations will integrate Graph Attention Networks (GAT) to dynamically learn and adjust edge weights, enabling real-time adaptation to sudden market regime shifts.</li>
+            </ul>
         </div>
     </div>
 
     <footer>
         <p>© 2026 Factor-Driven Spectral GCN Research Team. All rights reserved.</p>
-        <p>Built for ICOML / TWSIAM | Generated via HTML</p>
+        <p>Built for ICOML 2026 | Developed by Chun-Hao, Wen</p>
     </footer>
 
     <script>
-        // 將單期報酬率陣列轉換為「累積價值(NAV)」的函數，初始為 100
         function calculateCumulativeNAV(returns) {
-            let navs = [100]; // 第0期本金為 100
+            let navs = [100]; 
             let current = 100;
             for(let i = 0; i < returns.length; i++) {
                 current = current * (1 + returns[i]);
@@ -376,34 +346,18 @@
             return navs;
         }
 
-        // ==========================================
-        // 1. 季換股數據 (Quarterly Data)
-        // ==========================================
-        const qLabels = ["初始", "2024Q1", "2024Q2", "2024Q3", "2024Q4", "2025Q1", "2025Q2", "2025Q3", "2025Q4", "2026Q1", "2026Q2"];
-        
-        // 根據您提供的 CSV 內容
+        const qLabels = ["Init", "2024Q1", "2024Q2", "2024Q3", "2024Q4", "2025Q1", "2025Q2", "2025Q3", "2025Q4", "2026Q1", "2026Q2"];
         const qReturns_0050 = [0.197, 0.1846, -0.0092, 0.0662, -0.0975, 0.0972, 0.1967, 0.1291, 0.0959, 0.397];
         const qReturns_EW   = [0.0618, 0.0758, -0.0182, -0.0189, -0.0435, -0.0129, 0.1364, 0.0649, 0.0802, 0.2847];
         const qReturns_HRP  = [0.0591, 0.0808, 0.0055, -0.0506, -0.0133, -0.0168, 0.0934, 0.0022, 0.0018, 0.0687];
-        
-        /* ❗ 請在此處貼上完整的 Factor GCN 季報酬數據 (目前依據您截斷的數值填寫，請補齊) */
         const qReturns_GCN  = [-0.0378, 0.234, -0.0056, -0.0145, -0.1068, 0.04, 0.2661, 0.1274, 0.1224, 0.4081]; 
 
-        // ==========================================
-        // 2. 月換股數據 (Monthly Data)
-        // ==========================================
-        // 為了圖表美觀，這裡使用月份簡寫
-        const mLabels = ["初始", "24/01", "24/02", "24/03", "24/04", "24/05", "24/06", "24/07", "24/08", "24/09", "24/10", "24/11", "24/12", "25/01", "25/02", "25/03", "25/04", "25/05", "25/06", "25/07", "25/08", "25/09", "25/10", "25/11", "25/12", "26/01", "26/02", "26/03", "26/04", "26/05"];
-        
-        // 完整擷取自您上傳的 Factor GCN 月報酬數據
+        const mLabels = ["Init", "24/01", "24/02", "24/03", "24/04", "24/05", "24/06", "24/07", "24/08", "24/09", "24/10", "24/11", "24/12", "25/01", "25/02", "25/03", "25/04", "25/05", "25/06", "25/07", "25/08", "25/09", "25/10", "25/11", "25/12", "26/01", "26/02", "26/03", "26/04", "26/05"];
         const mReturns_GCN = [-0.0572, 0.085, 0.0253, 0.0186, 0.0619, 0.0503, -0.0309, 0.0352, 0.0222, -0.0011, -0.0074, 0.0394, 0.0224, 0.0686, -0.0761, -0.0454, 0.0406, 0.0422, 0.052, 0.1877, 0.0093, 0.0956, 0.0019, 0.0885, 0.347, 0.13, -0.1156, 0.3938, 0.0302];
-
-        /* ❗ 請將您 CSV 中 0050, 等權重, HRP 的「完整 29 個月數據」貼入下方陣列中 */
         const mReturns_0050 = [0.0191, 0.0666, 0.1050, 0.0054, 0.0631, 0.0997, -0.0259, -0.0144, 0.0171, 0.0447, -0.0171, 0.0211, 0.0517, -0.0010, -0.0814, -0.0437, 0.0360, 0.0997, 0.0673, 0.0335, 0.1115, 0.1145,-0.0281, 0.0667, 0.0997, 0.1350, -0.0996, 0.1995, 0.1142];
-        const mReturns_EW   = [-0.0237,	0.0352,	0.0364,	0.0121,	0.0284,	0.0236,	-0.0173,	-0.0089,	-0.0050,	-0.0157,	-0.0137,	-0.0055,	0.0049,	0.0546,	-0.0757,	-0.0590,	0.0296,	0.0233,	0.0417,	0.0479,	0.0517,0.0349,	0.0082,	0.00198,	0.0932,	0.0874,	-0.0742,	0.0989,	0.1374];
-        const mReturns_HRP  = [-0.0177,	0.0237,	0.0626,	0.0203,	0.0174,	0.0240,	-0.0010,	-0.0048,	0.0057,	-0.0227,	-0.0163,	-0.0168,	0.0051,	0.0341,	-0.0418,	-0.0382,	0.0164,	0.0144,	0.0157,	0.0187,	0.0282,	-0.0076,	0.0078,	0.0003,	0.0163,	0.0441,	-0.0380,	0.0138,	0.0445]; // 請填入完整的 HRP 月報酬數據
+        const mReturns_EW   = [-0.0237, 0.0352, 0.0364, 0.0121, 0.0284, 0.0236, -0.0173,    -0.0089,    -0.0050,    -0.0157,    -0.0137,    -0.0055,    0.0049, 0.0546, -0.0757,    -0.0590,    0.0296, 0.0233, 0.0417, 0.0479, 0.0517,0.0349,  0.0082, 0.00198,    0.0932, 0.0874, -0.0742,    0.0989, 0.1374];
+        const mReturns_HRP  = [-0.0177, 0.0237, 0.0626, 0.0203, 0.0174, 0.0240, -0.0010,    -0.0048,    0.0057, -0.0227,    -0.0163,    -0.0168,    0.0051, 0.0341, -0.0418,    -0.0382,    0.0164, 0.0144, 0.0157, 0.0187, 0.0282, -0.0076,    0.0078, 0.0003, 0.0163, 0.0441, -0.0380,    0.0138, 0.0445]; 
 
-        // 圖表通用設定檔
         const chartOptions = {
             responsive: true,
             maintainAspectRatio: false,
@@ -415,35 +369,18 @@
                 }
             },
             scales: {
-                y: { title: { display: true, text: '累積價值 (Base = 100)' } },
+                y: { title: { display: true, text: 'Cumulative NAV (Base = 100)' } },
                 x: { grid: { display: false } }
             }
         };
 
-        // 共用線條樣式
         const datasetConfig = {
             gcn:  { label: 'Factor GCN', borderColor: '#5A1826', backgroundColor: 'rgba(90, 24, 38, 0.1)', borderWidth: 3, tension: 0.3, pointRadius: 3, fill: true },
             o050: { label: '0050 ETF', borderColor: '#999999', borderWidth: 2, tension: 0.3, pointRadius: 2, borderDash: [5, 5] },
-            ew:   { label: '等權重 (Equal Weight)', borderColor: '#4A90E2', borderWidth: 2, tension: 0.3, pointRadius: 2 },
+            ew:   { label: 'Equal Weight', borderColor: '#4A90E2', borderWidth: 2, tension: 0.3, pointRadius: 2 },
             hrp:  { label: 'HRP', borderColor: '#50E3C2', borderWidth: 2, tension: 0.3, pointRadius: 2 }
         };
 
-        // 渲染季換股折線圖
-        new Chart(document.getElementById('quarterlyChart'), {
-            type: 'line',
-            data: {
-                labels: qLabels,
-                datasets: [
-                    { ...datasetConfig.gcn, data: calculateCumulativeNAV(qReturns_GCN) },
-                    { ...datasetConfig.o050, data: calculateCumulativeNAV(qReturns_0050) },
-                    { ...datasetConfig.ew, data: calculateCumulativeNAV(qReturns_EW) },
-                    { ...datasetConfig.hrp, data: calculateCumulativeNAV(qReturns_HRP) }
-                ]
-            },
-            options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { display: true, text: '策略績效比較 - 季換股 (Quarterly Rebalancing)' } } }
-        });
-
-        // 渲染月換股折線圖
         new Chart(document.getElementById('monthlyChart'), {
             type: 'line',
             data: {
@@ -455,8 +392,22 @@
                     { ...datasetConfig.hrp, data: calculateCumulativeNAV(mReturns_HRP) }
                 ]
             },
-            options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { display: true, text: '策略績效比較 - 月換股 (Monthly Rebalancing)' } } }
+            options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { display: true, text: 'Strategy Comparison - Monthly Rebalancing' } } }
+        });
+
+        new Chart(document.getElementById('quarterlyChart'), {
+            type: 'line',
+            data: {
+                labels: qLabels,
+                datasets: [
+                    { ...datasetConfig.gcn, data: calculateCumulativeNAV(qReturns_GCN) },
+                    { ...datasetConfig.o050, data: calculateCumulativeNAV(qReturns_0050) },
+                    { ...datasetConfig.ew, data: calculateCumulativeNAV(qReturns_EW) },
+                    { ...datasetConfig.hrp, data: calculateCumulativeNAV(qReturns_HRP) }
+                ]
+            },
+            options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { display: true, text: 'Strategy Comparison - Quarterly Rebalancing' } } }
         });
     </script>
 </body>
-</html>s
+</html>

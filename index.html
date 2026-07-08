@@ -9,173 +9,202 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <style>
+<style>
         :root {
-            --primary-color: #5A1826; /* Deep Burgundy */
-            --secondary-color: #D4AF37; /* Luxury Gold */
-            --bg-color: #F8F9FA;
-            --text-main: #333333;
-            --text-light: #666666;
-            --white: #FFFFFF;
+            /* 外圍背景：保留你覺得不錯的極深勃根地酒紅 */
+            --bg-dark-red: #280810;      
+            
+            /* 金色調僅用於點綴與文字，絕不大面積使用 */
+            --header-gold: #C8A97E;
+            --header-gold-light: #E6CE9F;
+
+            /* 內容卡片：保留護眼且高級的象牙暖白 */
+            --card-bg: #F5F2EA;           
+            --surface-alt: #EBE5D9;        
+            
+            /* 文字與點綴 */
+            --text-main: #2C2A29;          
+            --accent-red: #521524;         
+            --border-color: #D8CEBB;
         }
         
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Noto Sans TC', -apple-system, sans-serif;
+            background-color: var(--bg-dark-red); 
             color: var(--text-main);
             line-height: 1.8;
             margin: 0;
-            padding-top: 60px;
+            padding-top: 70px;
+            letter-spacing: 0.5px;
         }
 
+        /* 導覽列：底色改為柔和的純金，文字改為深紅 */
         nav {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            background-color: #2D2D2D;
+            /* 使用微漸層的金色，比純單色更有金屬質感 */
+            background: linear-gradient(180deg, var(--header-gold-light) 0%, var(--header-gold) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* 底部加上微光邊線增加立體感 */
             z-index: 1000;
             display: flex;
             justify-content: center;
-            padding: 15px 0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+            padding: 16px 0;
         }
 
         nav a {
-            color: var(--white);
+            color: var(--bg-dark-red); /* 深紅色字體 */
             text-decoration: none;
-            margin: 0 20px;
-            font-size: 1.05em;
-            font-weight: 400;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            margin: 0 25px;
+            font-size: 0.95em;
+            font-weight: 700; /* 在金色底上，字體加粗會讓標題更清晰、更有份量 */
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3); /* 加上極淡的白底陰影，讓深紅字更跳脫 */
         }
 
-        nav a:hover { color: var(--secondary-color); }
+        nav a:hover { 
+            color: #000000; /* 滑鼠移過去變為純黑，增加互動感 */
+            transform: translateY(-1px);
+        }
 
+        nav a:hover { color: #FFFFFF; }
+
+        /* Header：拔掉大片黃色，改回帶有微光的深紅，讓金字自然跳脫出來 */
         header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 60px 20px 80px 20px;
+            background: radial-gradient(circle at 50% 0%, #3d101a 0%, var(--bg-dark-red) 80%);
+            color: #FFFFFF;
+            padding: 100px 20px 120px 20px;
             text-align: center;
-            border-bottom: 6px solid var(--secondary-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(200, 169, 126, 0.1);
         }
 
         .logo-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px auto;
-            background-color: var(--white);
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 30px auto;
+            background-color: var(--bg-dark-red);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 4px solid var(--secondary-color);
+            border: 2px solid var(--header-gold);
+            box-shadow: 0 0 25px rgba(200, 169, 126, 0.1);
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .logo-container img {
-            width: 100%;
-            height: 100%;
+            width: 75%;
+            height: 75%;
             object-fit: contain;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5em;
-            letter-spacing: 2px;
-            font-weight: 700;
+            font-size: 2.8em;
+            letter-spacing: 4px;
+            font-weight: 500;
         }
 
         header h2 {
-            color: var(--secondary-color);
-            font-size: 1.4em;
-            margin-top: 15px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .authors {
-            margin-top: 30px;
+            color: var(--header-gold); /* 副標題用金色點綴 */
             font-size: 1.1em;
-            opacity: 0.9;
+            margin-top: 15px;
+            font-weight: 400;
+            letter-spacing: 3px;
         }
 
-        .institution {
-            font-size: 1em;
-            opacity: 0.8;
-            margin-top: 5px;
-        }
+        .authors { margin-top: 40px; font-size: 1.05em; color: rgba(255,255,255,0.85); font-weight: 300; }
+        .institution { font-size: 0.9em; margin-top: 5px; color: rgba(255,255,255,0.5); }
 
         .container {
-            max-width: 1100px;
-            margin: 50px auto;
+            max-width: 1050px;
+            margin: -40px auto 60px auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
 
+        /* 以下為保留的完美結構：象牙白卡片與排版 */
         .card {
-            background: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            padding: 40px;
-            margin-bottom: 40px;
-            border-left: 6px solid var(--secondary-color);
-            transition: transform 0.3s ease;
-            scroll-margin-top: 80px; 
+            background: var(--card-bg);
+            border-radius: 6px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            padding: 50px;
+            margin-bottom: 50px;
+            position: relative;
+            scroll-margin-top: 100px; 
+            border-top: 3px solid var(--header-gold);
         }
-
-        .card:hover { transform: translateY(-5px); }
 
         h3 {
-            color: var(--primary-color);
-            font-size: 1.8em;
+            color: var(--accent-red);
+            font-size: 1.7em;
+            font-weight: 600;
             margin-top: 0;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #EAEAEA;
-            display: flex;
-            align-items: center;
-        }
-
-        h3::before {
-            content: "✦";
-            color: var(--secondary-color);
-            margin-right: 10px;
-            font-size: 1.2em;
+            margin-bottom: 30px;
+            padding-left: 15px;
+            border-left: 4px solid var(--header-gold);
+            letter-spacing: 1px;
         }
 
         .stage-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
 
         .stage-box {
-            background: #FAFAFA;
-            padding: 25px;
-            border-radius: 8px;
-            border-top: 4px solid var(--primary-color);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            background: var(--surface-alt);
+            padding: 30px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .stage-box:hover {
+            border-color: var(--header-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
         }
 
         .stage-box h4 {
-            color: var(--primary-color);
-            font-size: 1.3em;
+            color: var(--accent-red);
+            font-size: 1.25em;
             margin-top: 0;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
-        .highlight { color: var(--primary-color); font-weight: 700; }
+        .highlight { 
+            color: var(--bg-dark-red); 
+            background-color: var(--header-gold-light); 
+            padding: 2px 6px; 
+            border-radius: 3px;
+            font-weight: 600; 
+        }
 
         table {
-            width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--white);
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
         }
-        table th, table td { border: 1px solid #EAEAEA; padding: 15px; text-align: center; }
-        table th { background-color: var(--primary-color); color: var(--white); font-weight: 400; }
-        table tr:nth-child(even) { background-color: #FDFDFD; }
+        table th, table td { 
+            padding: 16px; 
+            text-align: left; 
+            border-bottom: 1px solid var(--border-color);
+        }
+        table th { 
+            color: var(--accent-red); 
+            font-weight: 600; 
+            font-size: 0.95em;
+            letter-spacing: 1px;
+        }
+        table tr:last-child td { border-bottom: none; }
 
         .chart-container {
             position: relative;
@@ -183,14 +212,19 @@
             width: 100%;
             margin-top: 30px;
             padding: 20px;
-            background: #FAFAFA;
-            border-radius: 8px;
-            border: 1px solid #EAEAEA;
+            background: var(--surface-alt);
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
 
         footer {
-            background: var(--primary-color); color: var(--white); text-align: center;
-            padding: 30px; margin-top: 60px; font-size: 0.9em; opacity: 0.9;
+            background-color: transparent; 
+            color: rgba(255, 255, 255, 0.4); 
+            text-align: center;
+            padding: 40px 20px; 
+            margin-top: 40px; 
+            font-size: 0.85em; 
+            border-top: 1px solid rgba(200, 169, 126, 0.15);
         }
     </style>
 </head>

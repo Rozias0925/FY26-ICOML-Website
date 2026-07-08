@@ -249,51 +249,101 @@
     <div class="container">
         <div class="card" id="motivation">
             <h3>Motivation: The Quest for Optimal Asset Allocation</h3>
-            <p>Asset allocation seeks an optimal capital weight vector \( \mathbf{w} \) to maximize risk-adjusted performance, fundamentally formulated as the Sharpe Ratio. The objective is mathematically defined as:</p>
-            <p style="text-align: center; font-size: 1.2em;">
-                \( \max_{\mathbf{w}} SharpeRatio(\mathbf{w}) = \frac{Benefit(\mathbf{w})}{Risk(\mathbf{w})} = \frac{\mathbf{w}^T \boldsymbol{\mu} - R_f}{\sqrt{\mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}}} \)
-            </p>
-            <p style="text-align: center;">subject to \( 1^T \mathbf{w} = 1, \mathbf{w} \ge 0 \)</p>
-            <p>Where \( \boldsymbol{\mu} \) is the expected return vector, \( \boldsymbol{\Sigma} \) is the covariance matrix quantifying structural risk, and \( R_f \) is the risk-free rate.</p>
-            <p><strong>The Traditional Flaw:</strong> Classical models rely heavily on plug-in estimators (\( \boldsymbol{\mu}, \boldsymbol{\Sigma} \)) that suffer extensively from market noise, ill-conditioning, and "false correlations".</p>
-            <p><strong>The Machine Learning Solution:</strong> We seamlessly bridge Machine Learning and Financial Optimization by introducing <span class="highlight">Factor GCN</span>. It serves as an end-to-end non-linear solver directly mapping market graphs to the optimal simplex \( \Delta^{N-1} \), ensuring a robust, noise-resistant portfolio allocation.</p>
+            
+            <div class="motivation-section" style="margin-bottom: 20px;">
+                <h4 style="color: #800000; border-bottom: 2px solid #d4af37; padding-bottom: 5px;">1. The Optimization Problem & Sharpe Ratio</h4>
+                <p>In quantitative finance, the core objective of asset allocation is to discover an optimal capital weight vector, \( \mathbf{w} \), that maximizes risk-adjusted performance. Mathematically, this is formulated as maximizing the <strong>Sharpe Ratio</strong>, which essentially measures the excess return generated per unit of structural risk.</p>
+                <p>The objective function is defined as:</p>
+                <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                    \( \max_{\mathbf{w}} SharpeRatio(\mathbf{w}) = \frac{Benefit(\mathbf{w})}{Risk(\mathbf{w})} = \frac{\mathbf{w}^T \boldsymbol{\mu} - R_f}{\sqrt{\mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}}} \)
+                </p>
+                <p style="text-align: center; color: #666; font-style: italic;">subject to \( 1^T \mathbf{w} = 1, \mathbf{w} \ge 0 \)</p>
+                <p>Here, \( \boldsymbol{\mu} \) represents the expected return vector, \( \boldsymbol{\Sigma} \) is the covariance matrix quantifying structural risk, and \( R_f \) is the risk-free rate.</p>
+            </div>
+
+            <div class="motivation-section" style="margin-bottom: 20px;">
+                <h4 style="color: #800000; border-bottom: 2px solid #d4af37; padding-bottom: 5px;">2. The Traditional Flaw: Market Noise & False Correlations</h4>
+                <p>Classical portfolio theories (such as Markowitz's Mean-Variance Optimization) and certain hierarchical models heavily rely on plug-in estimators (\( \boldsymbol{\mu} \) and \( \boldsymbol{\Sigma} \)) derived from historical prices. However, financial markets are notoriously contaminated with <strong>market noise</strong> and <strong>false correlations</strong>.</p>
+                <p>This reliance makes traditional models extremely fragile: minor fluctuations or estimation errors lead to ill-conditioned covariance matrices, resulting in extreme, unstable weight allocations that fail to withstand real-world market volatility.</p>
+            </div>
+
+            <div class="motivation-section">
+                <h4 style="color: #800000; border-bottom: 2px solid #d4af37; padding-bottom: 5px;">3. The Machine Learning Solution: Factor GCN</h4>
+                <p>To overcome the interference of market noise in this optimization problem, we bridge Machine Learning and Financial Optimization by introducing the <strong>Factor GCN</strong> framework.</p>
+                <p>Instead of relying on pure historical prices, we construct the underlying market graph using a multi-factor model rooted in real economic logic. In this architecture, Factor GCN serves as an <strong>End-to-End Non-linear Solver</strong>. By leveraging spectral graph convolutions, it automatically extracts deep topological features among assets, effectively filtering out noise, and maps the market state directly to the optimal simplex \( \Delta^{N-1} \) for robust portfolio allocation.</p>
+            </div>
         </div>
 
         <div class="card" id="methodology">
             <h3>Methodology: The Factor GCN Architecture</h3>
-            <p>By utilizing graph neural networks to extract dynamic, non-linear market features, we construct a robust learning framework.</p>
-            <div class="stage-grid">
-                <div class="stage-box">
-                    <h4>STAGE 1: Factor-Based Structural Graph</h4>
-                    <p>Instead of relying on noisy historical return correlations, we construct a market graph from long-term fundamental factors containing firm characteristics such as Market Capitalization, ROA, and Debt Ratio.</p>
-                    <p style="text-align: center;">\( A_{ij} = \exp\left(-\frac{||z_i - z_j||^2}{2\sigma^2}\right) \)</p>
-                    <p>We incorporate a self-loop mechanism \( \overline{A} = A + I_N \) and compute the symmetric normalized graph Laplacian:</p>
-                    <p style="text-align: center;">\( \tilde{L}_{sym} = \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} \)</p>
-                    <p>This resulting normalized graph acts as a structural filter, allowing short-term signals to propagate through fundamentally similar assets while suppressing noisy price correlations.</p>
-                </div>
-                <div class="stage-box">
-                    <h4>STAGE 2: Spectral Feature Fusion</h4>
-                    <p>We introduce short-term momentum signals (\( X \)) and leverage the structural map (\( \tilde{L}_{sym} \)) as a spatial low-pass filter.</p>
-                    <p>To extract high-level representations, we apply a learnable feature extraction matrix \( \Theta \) alongside a Sparse Activation mechanism:</p>
-                    <p style="text-align: center;">\( H = SparseAct_K(\tilde{L}_{sym} X \Theta) \)</p>
-                    <p>The \( SparseAct_K(\cdot) \) is a Top-K activation function that zeroes out all but the most promising K signals, maximizing the signal-to-noise ratio.</p>
+            
+            <div class="methodology-intro" style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #e0e0e0;">
+                <h4 style="color: #800000;">Prelude: Graph Laplacian as a Market Filter</h4>
+                <p>Before diving into the architecture, it is crucial to understand the role of the <strong>Graph Laplacian</strong> in our framework. In spectral graph theory, the normalized Laplacian acts as a mathematical operator that captures the underlying manifold of the data. For financial markets, applying Graph Convolutional Networks (GCNs) means utilizing this Laplacian as a <em>spatial low-pass filter</em>. It allows true economic signals to propagate smoothly across fundamentally related assets while aggressively smoothing out high-frequency market noise and spurious volatility.</p>
+            </div>
+
+            <div class="stage-box" style="margin-bottom: 30px; padding: 25px; background-color: #faf9f6; border-left: 5px solid #d4af37; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <h4 style="color: #d4af37; margin-top: 0; font-size: 1.2em;">STAGE 1: Factor-Based Structural Graph</h4>
+                <p>Instead of relying on noisy historical return correlations, we construct a market graph from long-term fundamental factors containing firm characteristics such as Market Capitalization, ROA, and Debt Ratio. The distance is computed via a Gaussian kernel:</p>
+                <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                    \( A_{ij} = \exp\left(-\frac{||z_i - z_j||^2}{2\sigma^2}\right) \)
+                </p>
+                <p>We incorporate a self-loop mechanism \( \tilde{A} = A + I_N \) and compute the symmetric normalized graph Laplacian:</p>
+                <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                    \( \tilde{L}_{sym} = \tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} \)
+                </p>
+                <p>Here, <strong>\( \tilde{D} \) is the Degree Matrix</strong> (a diagonal matrix where each entry represents the sum of edge weights connected to a node). Normalizing by \( \tilde{D} \) is essential to prevent numerical explosion during matrix multiplication. This resulting normalized graph acts as a structural filter, allowing short-term signals to propagate through fundamentally similar assets while suppressing noisy price correlations.</p>
+            </div>
+
+            <div class="stage-box" style="padding: 25px; background-color: #faf9f6; border-left: 5px solid #d4af37; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <h4 style="color: #d4af37; margin-top: 0; font-size: 1.2em;">STAGE 2: Spectral Feature Fusion & Scoring</h4>
+                <p>We introduce short-term momentum signals (\( X \)) and leverage the structural map (\( \tilde{L}_{sym} \)) as a spatial low-pass filter. To extract high-level representations, we apply a feature extraction matrix \( \Theta \) alongside a customized Sparse Activation mechanism:</p>
+                <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                    \( H = SparseAct_K(\tilde{L}_{sym} X \Theta) \)
+                </p>
+                <p>The \( SparseAct_K(\cdot) \) is a Top-K activation function that zeroes out all but the most promising K signals, maximizing the signal-to-noise ratio. Next, a Scoring Layer projects these hidden features into a 1-dimensional confidence score (Z-score) for each asset using the scoring weight matrix \( \Phi \):</p>
+                <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                    \( \mathbf{z} = H \Phi \)
+                </p>
+                <p>Finally, to satisfy the long-only constraint, these Z-scores are mapped onto a probability simplex using a Temperature-scaled Softmax function, yielding the portfolio weight vector \( \mathbf{w} \):</p>
+                <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                    \( w_i = \frac{\exp(z_i / \tau)}{\sum_j \exp(z_j / \tau)} \)
+                </p>
+                
+                <div style="background-color: #ffe6e6; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <p style="margin: 0; color: #800000; font-weight: bold;">
+                        <i class="fas fa-lightbulb"></i> Note on Learnable Parameters:
+                    </p>
+                    <p style="margin: 5px 0 0 0; color: #5a0000; line-height: 1.5;">
+                        For readers new to Graph Neural Networks, it is vital to note that <strong>\( \Theta \)</strong> and <strong>\( \Phi \)</strong> are <em>Learnable Parameters (Neural Network Weights)</em>. While initially randomized, they will be continuously optimized via Backpropagation in STAGE 3, learning to dynamically map market signals directly to the maximum Sharpe Ratio.
+                    </p>
                 </div>
             </div>
         </div>
 
         <div class="card" id="optimization">
             <h3>STAGE 3: End-to-End Optimization via Gradient Descent</h3>
-            <p>The filtered hidden state \( H \) is projected into an investment confidence vector \( Z \) via a secondary scoring parameter \( \Phi \). These signals are then mapped into a strict capital allocation vector \( \mathbf{w} \) using a Temperature-scaled Softmax function.</p>
-            <p style="text-align: center; font-size: 1.1em;">\( \mathbf{w} = Softmax(Z / \tau) \)</p>
             
-            <p><strong>Objective Function & Backpropagation:</strong> Instead of traditional quadratic programming, we optimize \( \Theta \) and \( \Phi \) over 500 epochs using Gradient Descent. We directly utilize the negative Sharpe Ratio as our loss function:</p>
-            <p style="text-align: center; font-size: 1.1em;">\( \mathcal{L}(\Theta, \Phi) = -SharpeRatio(\mathbf{w}) = -\frac{\mathbf{w}^T \boldsymbol{\mu} - R_f}{\sqrt{\mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}}} \)</p>
-
-            <p>The gradients of the Sharpe Ratio flow backward through the network via the Chain Rule of Calculus:</p>
-            <p style="text-align: center;">\( \nabla_{\Phi}\mathcal{L} = \frac{\partial\mathcal{L}}{\partial \mathbf{w}} \cdot \frac{\partial \mathbf{w}}{\partial Z} \cdot \frac{\partial Z}{\partial \Phi} \)</p>
-            <p style="text-align: center;">\( \nabla_{\Theta}\mathcal{L} = \frac{\partial\mathcal{L}}{\partial \mathbf{w}} \cdot \frac{\partial \mathbf{w}}{\partial Z} \cdot \frac{\partial Z}{\partial H} \cdot \frac{\partial H}{\partial \Theta} \)</p>
+            <p>The capital allocation vector \( \mathbf{w} \) generated at the end of STAGE 2 represents a <strong>simulated portfolio deployment</strong> based on the neural network's current parameter state. To evaluate whether this simulated allocation is robust against historical market realities, we must calculate an objective score—the <strong>Loss Function (\( \mathcal{L} \))</strong>. Instead of traditional quadratic programming, we directly utilize the negative Sharpe Ratio of the simulated portfolio as our loss function to guide the model:</p>
             
-            <p>Combined with a learning rate \( \eta \) and an Early Stopping mechanism to prevent overfitting, this enables the model to autonomously adapt to true market dynamics.</p>
+            <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                \( \mathcal{L}(\Theta, \Phi) = -SharpeRatio(\mathbf{w}) = -\frac{\mathbf{w}^T \boldsymbol{\mu} - R_f}{\sqrt{\mathbf{w}^T \boldsymbol{\Sigma} \mathbf{w}}} \)
+            </p>
+            
+            <p>Where \( \boldsymbol{\mu} \) is the asset expected return vector, \( \boldsymbol{\Sigma} \) is the structural covariance matrix, and \( R_f \) is the risk-free rate. Minimizing this objective loss \( \mathcal{L} \) is mathematically identical to maximizing the risk-adjusted returns of our entire fund.</p>
+            
+            <p><strong>The Mechanics of Gradient Descent:</strong> To find the parameter configuration that minimizes this loss, the framework establishes a complex, high-dimensional error landscape over the parameter space. We employ <strong>Gradient Descent</strong> to iteratively optimize our weights. The gradient \( \nabla \mathcal{L} \) points in the direction of the steepest increase in error. By continuously stepping in the exact opposite direction (\( -\nabla \mathcal{L} \)) scaled by a learning rate \( \eta \), the network actively pushes its internal weights toward the minimum error state. To ensure stable mathematical convergence and prevent the network from overfitting to transient market noises, we enforce a strict optimization budget limiting the model to a <strong>maximum of 500 training epochs</strong>.</p>
+            
+            <p><strong>Multivariable Calculus & Backpropagation:</strong> To precisely compute how a microscopic adjustment in our early layers alters the final portfolio performance, gradients flow backward from the loss layer through the entire network architecture. Utilizing the <strong>Chain Rule of Multivariable Calculus</strong>, the automatic differentiation calculates the partial derivatives with respect to our learnable parameters—the scoring matrix \( \Phi \) and the GCN feature extraction matrix \( \Theta \)—as follows:</p>
+            
+            <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                \( \frac{\partial \mathcal{L}}{\partial \Phi} = \frac{\partial \mathcal{L}}{\partial \mathbf{w}} \cdot \frac{\partial \mathbf{w}}{\partial \mathbf{z}} \cdot \frac{\partial \mathbf{z}}{\partial \Phi} \)
+            </p>
+            <p style="text-align: center; font-size: 1.2em; margin: 15px 0;">
+                \( \frac{\partial \mathcal{L}}{\partial \Theta} = \frac{\partial \mathcal{L}}{\partial \mathbf{w}} \cdot \frac{\partial \mathbf{w}}{\partial \mathbf{z}} \cdot \frac{\partial \mathbf{z}}{\partial H} \cdot \frac{\partial H}{\partial \Theta} \)
+            </p>
+            
+            <p>Through this analytical backpropagation, the error discovered at the final portfolio level serves as an immediate correction signal. By updating \( \Phi \) and \( \Theta \) side-by-step, the model autonomously learns to bypass market noise and directly maps raw factor graphs to production-ready, highly stable investment weights.</p>
         </div>
 
         <div class="card" id="performance">
@@ -364,9 +414,10 @@
         </div>
     </div>
 
-    <footer>
-        <p>© 2026 Factor-Driven Spectral GCN Research Team. All rights reserved.</p>
-        <p>Built for ICOML 2026 | Developed by Chun-Hao, Wen</p>
+    
+    <footer style="background: linear-gradient(180deg, var(--header-gold-light) 0%, var(--header-gold) 100%); color: #4A0000; text-align: center; padding: 30px; margin-top: 60px; font-size: 0.95em; font-weight: bold; border-top: 4px solid #800000; letter-spacing: 0.5px;">
+        <p style="margin: 0; line-height: 1.6;">© 2026 Factor-Driven Spectral GCN Project. All rights reserved.</p>
+        <p style="margin: 5px 0 0 0; line-height: 1.6; opacity: 0.95;">Built for ICOML 2026 | Developed solely by Chun-Hao, Wen</p>
     </footer>
 
     <script>
@@ -443,5 +494,6 @@
             options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { display: true, text: 'Strategy Comparison - Quarterly Rebalancing' } } }
         });
     </script>
+
 </body>
 </html>

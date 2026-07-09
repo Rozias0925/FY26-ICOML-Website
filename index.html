@@ -375,14 +375,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>Market Index (0050.TW)</td><td>3.068</td><td>4.121</td></tr>
-                    <tr><td>Equal Weight (1/N)</td><td>1.745</td><td>3.873</td></tr>
-                    <tr><td>Hierarchical Risk Parity (HRP)</td><td>1.244</td><td>4.345</td></tr>
-                    <tr style="color: var(--accent-red); font-weight: bold;"><td>Factor GCN (Proposed)</td><td>2.438</td><td>4.150</td></tr>
+                    <tr><td>Market Index (0050.TW)</td><td>3.068</td><td>2.448</td></tr>
+                    <tr><td>Equal Weight (1/N)</td><td>1.745</td><td>2.570</td></tr>
+                    <tr><td>Hierarchical Risk Parity (HRP)</td><td>1.244</td><td>2.356</td></tr>
+                    <tr><td>Factor GCN (Proposed)</td><td>2.438</td><td>2.456</td></tr>
                 </tbody>
             </table>
             <p style="margin-top: 15px; font-size: 0.95em; padding: 15px; background: #FFF9E6; border-left: 4px solid #C8A97E; border-radius: 4px;">
-                💡 <strong>Conclusion:</strong> In the quarterly rebalancing scenario, Factor GCN performs "neutral". While it secures the second-highest total return, its volatility metrics remain comparable to the market benchmark (0050.TW), indicating that quarterly updates might be too sparse to fully capture the dynamics of this bull market.
+                💡 <strong>Conclusion:</strong> In the quarterly rebalancing scenario, Factor GCN delivers a neutral performance. While it achieves the second-highest total return, its volatility metrics remain closely aligned with the market benchmark (0050.TW). Let's check out the second scenario.
             </p>
 
             <div class="chart-container">
@@ -416,17 +416,34 @@
 
         <div class="card" id="future-work">
             <h3>Generalization and Future Work</h3>
-            <ul>
-                <li><strong>Customizable Factor Inputs:</strong> The framework is highly adaptable, allowing portfolio managers to flexibly substitute the underlying structural factors to align with their specific investment mandates and risk preferences.</li>
-                <li><strong>Dynamic Perception via GAT:</strong> Future iterations will integrate Graph Attention Networks (GAT) to dynamically learn and adjust edge weights, enabling real-time adaptation to sudden market regime shifts.</li>
-            </ul>
+            <p>While the current Factor GCN framework has demonstrated significant out-of-sample robustness, its underlying architecture is designed as a universal, highly adaptable mathematical chassis. Our future research and development will focus on the following core dimensions:</p>
+            
+            <div class="stage-grid">
+                <div class="stage-box" style="background-color: #faf9f6; border-left: 5px solid var(--header-gold);">
+                    <h4 style="color: var(--accent-red); margin-top: 0; font-size: 1.15em;">1. Customizable Topology</h4>
+                    <p>The current structural graph relies on fundamental firm characteristics. However, the framework is intrinsically agnostic to the input data type. Portfolio managers can flexibly substitute the underlying nodes and edges to align with their specific mandates.</p>
+                    <p>For instance, the Gaussian kernel can be reconstructed using <strong>ESG ratings, alternative data (e.g., NLP sentiment scores from financial news), or macroeconomic indicators</strong> across global equity markets.</p>
+                </div>
+
+                <div class="stage-box" style="background-color: #faf9f6; border-left: 5px solid var(--header-gold);">
+                    <h4 style="color: var(--accent-red); margin-top: 0; font-size: 1.15em;">2. Dynamic Graph Attention (GAT)</h4>
+                    <p>Presently, the normalized Graph Laplacian (\( \tilde{L}_{sym} \)) serves as a relatively static spatial filter. While effective in stable regimes, sudden macroeconomic shocks (Black Swan events) can cause immediate structural regime shifts where static relationships temporarily fail.</p>
+                    <p>To address this, future iterations will integrate <strong>Graph Attention Networks (GAT)</strong>. By deploying self-attention mechanisms, the network will learn to dynamically adjust edge weights between assets in real-time, maximizing adaptability during extreme market volatility.</p>
+                </div>
+
+                <div class="stage-box" style="background-color: #faf9f6; border-left: 5px solid var(--header-gold);">
+                    <h4 style="color: var(--accent-red); margin-top: 0; font-size: 1.15em;">3. Tactical Alpha & Short-Term Offensive Strategies</h4>
+                    <p>Empirical evidence from our dual-frequency backtests clearly indicates that Factor GCN's true alpha-generating competitive edge is unlocked under shorter trading intervals. The stark outperformance of the monthly protocol over the quarterly setup suggests that the model might be exceptionally potent at digesting fast-moving momentum signals.</p>
+                    <p>Consequently, we plan to pivot future research toward <strong>short-term offensive trading styles (e.g., weekly or bi-weekly rebalancing)</strong>. By incorporating high-frequency liquidity factors and order-book dynamics, the GCN can be optimized to act as an aggressive tactical solver, capitalizing on transient market anomalies before they decay.</p>
+                </div>
+            </div>
         </div>
     </div>
 
     
     <footer style="background: linear-gradient(180deg, var(--header-gold-light) 0%, var(--header-gold) 100%); color: #4A0000; text-align: center; padding: 30px; margin-top: 60px; font-size: 0.95em; font-weight: bold; border-top: 4px solid #800000; letter-spacing: 0.5px;">
         <p style="margin: 0; line-height: 1.6;">© 2026 Factor-Driven Spectral GCN Project. All rights reserved.</p>
-        <p style="margin: 5px 0 0 0; line-height: 1.6; opacity: 0.95;">Built for ICOML 2026 | Developed solely by Chun-Hao, Wen</p>
+        <p style="margin: 5px 0 0 0; line-height: 1.6; opacity: 0.95;">Built for ICOML 2026 | Developed by Chun-Hao, Wen</p>
     </footer>
 
    <script>

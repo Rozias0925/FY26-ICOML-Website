@@ -9,6 +9,10 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
+
+
+
+
 <style>
         :root {
             /* 換回剛才幫你精準對齊的師大校徽紅 (NTNU Pantone 7622C) */
@@ -222,6 +226,94 @@
             margin-top: 40px; 
             font-size: 0.85em; 
             border-top: 1px solid rgba(200, 169, 126, 0.15);
+        }
+
+        /* ================================================== */
+        /* 手機版響應式設計 (RWD) - 讓手機瀏覽比例完美適應 */
+        /* ================================================== */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 90px; /* 避免導覽列變成兩行時遮擋到內容 */
+            }
+
+            /* 導覽列適應手機：允許多行折疊，縮小間距 */
+            nav {
+                flex-wrap: wrap;
+                padding: 10px 0;
+            }
+            nav a {
+                margin: 5px 10px;
+                font-size: 0.85em;
+                letter-spacing: 1px;
+            }
+
+            /* 標題與 Header 適應手機 */
+            header {
+                padding: 40px 15px 60px 15px;
+            }
+            .logo-container {
+                width: 90px;
+                height: 90px;
+                margin-bottom: 20px;
+            }
+            header h1 {
+                font-size: 1.6em;
+                letter-spacing: 2px;
+                line-height: 1.4;
+            }
+            header h2 {
+                font-size: 0.9em;
+                letter-spacing: 1px;
+                line-height: 1.5;
+                margin-top: 10px;
+            }
+
+            /* 內容卡片內縮，避免手機上留白太多擠壓文字 */
+            .card {
+                padding: 25px 15px;
+                margin-bottom: 30px;
+            }
+
+            /* 標題字體縮小 */
+            h3 {
+                font-size: 1.3em;
+                margin-bottom: 20px;
+            }
+            
+            h4 {
+                font-size: 1.1em !important; /* 強制縮小所有 h4 */
+            }
+
+            /* 表格加上橫向捲軸，避免把手機版面撐破 */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                font-size: 0.85em;
+            }
+            table th, table td {
+                padding: 10px;
+            }
+
+            /* 圖表容器高度適應手機 */
+            .chart-container {
+                height: 300px;
+                padding: 10px;
+                margin-top: 20px;
+            }
+
+            /* 數學公式如果有超出範圍也允許橫向滑動 */
+            p[style*="text-align: center"] {
+                overflow-x: auto;
+                overflow-y: hidden;
+                font-size: 1em !important;
+                padding-bottom: 5px;
+            }
+            
+            /* Stage Box 手機版微調 */
+            .stage-box {
+                padding: 20px 15px;
+            }
         }
     </style>
 

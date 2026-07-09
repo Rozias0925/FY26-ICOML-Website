@@ -84,25 +84,12 @@
             border-bottom: 1px solid rgba(200, 169, 126, 0.1);
         }
 
-        .logo-container {
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 30px auto;
-            background-color: var(--bg-dark-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--header-gold);
-            box-shadow: 0 0 25px rgba(200, 169, 126, 0.1);
-            overflow: hidden;
-        }
-
-        .logo-container img {
-            width: 75%;
-            height: 75%;
-            object-fit: contain;
-        }
+        .school-logo{
+    width:500px;
+    max-width:300vw;
+    height:auto;
+    margin-bottom:30px;
+}
 
         header h1 {
             margin: 0;
@@ -252,6 +239,14 @@
                 padding: 40px 15px 60px 15px;
             }
 
+            .school-logo{
+        width:80vw;
+        max-width:280px;
+        height:auto;
+        margin-bottom:20px;
+    }
+
+
             .logo-container {
                 width: auto !important;
                 max-width: 85vw !important; /* 魔法指令：最大寬度絕對不超過手機螢幕的 85% */
@@ -347,7 +342,10 @@
     </nav>
 
     <header>
-        <img src="School Logo.png" alt="National Taiwan Normal University Logo" style="height: 150px; margin-bottom: 30px;">
+        <img
+    src="School Logo.png"
+    alt="National Taiwan Normal University Logo"
+    class="school-logo">
         <h1>Factor GCN for End-to-End Portfolio Optimization</h1>
         <h2>International Conference on Optimization and Machine Learning 2026</h2>
         <div class="authors">Author: Chun-Hao, Wen (文君豪)</div>

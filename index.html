@@ -11,7 +11,7 @@
     
 <style>
         :root {
-            /* 外圍背景：保留你覺得不錯的極深勃根地酒紅 */
+            /* 換回剛才幫你精準對齊的師大校徽紅 (NTNU Pantone 7622C) */
             --bg-dark-red: #4e070b;      
             
             /* 金色調僅用於點綴與文字，絕不大面積使用 */
@@ -24,7 +24,7 @@
             
             /* 文字與點綴 */
             --text-main: #2C2A29;          
-            --accent-red: #521524;         
+            --accent-red: #8D191D;         
             --border-color: #D8CEBB;
         }
         
@@ -45,10 +45,10 @@
         nav {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            /* 使用微漸層的金色，比純單色更有金屬質感 */
+            /* 導覽列保留微微的金屬漸層是好看的 */
             background: linear-gradient(180deg, var(--header-gold-light) 0%, var(--header-gold) 100%);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* 底部加上微光邊線增加立體感 */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             z-index: 1000;
             display: flex;
             justify-content: center;
@@ -56,24 +56,24 @@
         }
 
         nav a {
-            color: var(--bg-dark-red); /* 深紅色字體 */
+            color: var(--bg-dark-red); 
             text-decoration: none;
             margin: 0 25px;
             font-size: 0.95em;
-            font-weight: 700; /* 在金色底上，字體加粗會讓標題更清晰、更有份量 */
+            font-weight: 700; 
             letter-spacing: 1.5px;
             transition: all 0.3s ease;
-            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3); /* 加上極淡的白底陰影，讓深紅字更跳脫 */
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3); 
         }
 
         nav a:hover { 
-            color: #000000; /* 滑鼠移過去變為純黑，增加互動感 */
+            color: #ffffff; 
             transform: translateY(-1px);
         }
 
-        /* Header：拔掉大片黃色，改回帶有微光的深紅，讓金字自然跳脫出來 */
+        /* Header：這裡拔掉了作怪的漸層，改成純色，與 body 完美融合！ */
         header {
-            background: radial-gradient(circle at 50% 0%, #3d101a 0%, var(--bg-dark-red) 80%);
+            background-color: var(--bg-dark-red);
             color: #FFFFFF;
             padding: 100px 20px 120px 20px;
             text-align: center;
@@ -108,7 +108,7 @@
         }
 
         header h2 {
-            color: var(--header-gold); /* 副標題用金色點綴 */
+            color: var(--header-gold); 
             font-size: 1.1em;
             margin-top: 15px;
             font-weight: 400;
@@ -126,7 +126,6 @@
             z-index: 10;
         }
 
-        /* 以下為保留的完美結構：象牙白卡片與排版 */
         .card {
             background: var(--card-bg);
             border-radius: 6px;

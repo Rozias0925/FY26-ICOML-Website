@@ -348,60 +348,69 @@
 
         <div class="card" id="performance">
             <h3>Empirical Results & Out-of-Sample Backtesting</h3>
-            <p>Rigorous backtesting demonstrates Factor GCN's real-world robustness against market noise:</p>
-            <ul>
-                <li><strong>Universe & Data:</strong> Top 150 listed companies in Taiwan sourced from the TEJ Pro database.</li>
-                <li><strong>Testing Period:</strong> January 2024 – May 2026 (Out-of-Sample).</li>
-                <li><strong>Baselines:</strong> Market Index (0050.TW), Equal-Weight (1/N), and Hierarchical Risk Parity (HRP).</li>
-                <li><strong>Execution:</strong> Monthly dynamic rebalancing under realistic constraints, with standard transaction costs fully incorporated.</li>
+            <p>To rigorously evaluate Factor GCN's real-world robustness and its ability to filter market noise, we conducted an extensive out-of-sample backtest. The simulation period spans from <strong>January 2024 to May 2026</strong>, a timeframe strategically selected for its <em>"slow grinds upward followed by sudden, sharp drawdowns."</em></p>
+            
+            <ul style="margin-bottom: 30px;">
+                <li style="margin-bottom: 10px;"><strong>Data Source & Universe:</strong> We sourced highly reliable fundamental and pricing data from the authoritative <strong>TEJ Pro database</strong>. Our investment universe consists of the <strong>Top 150 listed companies in Taiwan</strong> by market capitalization to ensure absolute liquidity.</li>
+                
+                <li style="margin-bottom: 10px;"><strong>Testing Period (Jan 2024 – May 2026):</strong> This specific timeframe was strategically selected as our Out-of-Sample period. It represents a highly complex market environment characterized by an overall bull market interspersed with <em>"slow grinds upward followed by sudden, sharp drawdowns"</em>. This serves as an ultimate stress test for the model's downside protection and risk-adjusted capabilities.</li>
+                
+                <li style="margin-bottom: 10px;"><strong>Baselines:</strong> Market Index (0050.TW), Equal-Weight (1/N), and the traditional Hierarchical Risk Parity (HRP) model.</li>
+                
+                <li style="margin-bottom: 10px;"><strong>Simulation Plans & Rebalancing:</strong> To isolate and measure the pure predictive power of the structural model, the backtest was conducted under a <strong>frictionless market assumption</strong> (excluding transaction costs and slippage), utilizing two distinct execution protocols:
+                    <ul>
+                        <li><em>Quarterly Rebalancing:</em> Serves as our standard baseline evaluation to observe long-term structural allocation logic.</li>
+                        <li><em>Monthly Rebalancing:</em> Introduced specifically to rigorously test the model's <strong>stability and adaptability</strong>. Frequent rebalancing in a volatile market proves whether the GCN can effectively filter out short-term noise.</li>
+                    </ul>
+                </li>
             </ul>
 
-            <h4 style="color: var(--primary-color); margin-top: 40px; font-size: 1.2em;">📊 Monthly Rebalancing Performance</h4>
+            <h4 style="color: var(--accent-red); margin-top: 40px; font-size: 1.2em;">📊 Scenario I: Quarterly Rebalancing</h4>
             <table>
                 <thead>
                     <tr>
                         <th>Strategy / Baseline</th>
-                        <th>Performance (Total Return)</th>
+                        <th>Performance (Gross Total Return)</th>
                         <th>Sharpe Ratio Standard Deviation</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Market Index (0050.TW)</td>
-                        <td>3.234</td>
-                        <td>4.121</td>
-                    </tr>
-                    <tr>
-                        <td>Equal Weight (1/N)</td>
-                        <td>1.704</td>
-                        <td>3.873</td>
-                    </tr>
-                    <tr>
-                        <td>Hierarchical Risk Parity (HRP)</td>
-                        <td>1.220</td>
-                        <td>4.345</td>
-                    </tr>
-                    <tr>
-                        <td style="color: var(--primary-color); font-weight: bold;">Factor GCN (Proposed)</td>
-                        <td style="color: var(--primary-color); font-weight: bold;">3.833</td>
-                        <td style="color: var(--primary-color); font-weight: bold;">3.742</td>
-                    </tr>
+                    <tr><td>Market Index (0050.TW)</td><td>3.068</td><td>4.121</td></tr>
+                    <tr><td>Equal Weight (1/N)</td><td>1.745</td><td>3.873</td></tr>
+                    <tr><td>Hierarchical Risk Parity (HRP)</td><td>1.244</td><td>4.345</td></tr>
+                    <tr style="color: var(--accent-red); font-weight: bold;"><td>Factor GCN (Proposed)</td><td>2.438</td><td>4.150</td></tr>
                 </tbody>
             </table>
-            
-            <p style="margin-top: 20px; font-size: 0.95em; color: var(--text-light); background: #FFF9E6; padding: 15px; border-left: 4px solid #F5A623; border-radius: 4px;">
-                💡 <strong>Conclusion:</strong> The out-of-sample cumulative returns illustrate that Factor GCN significantly outperforms traditional benchmarks. By autonomously filtering structural noise, Factor GCN achieves the highest total return (3.833) while simultaneously minimizing volatility, exhibiting the lowest Sharpe Ratio Standard Deviation (3.742) among all tested strategies.
+            <p style="margin-top: 15px; font-size: 0.95em; padding: 15px; background: #FFF9E6; border-left: 4px solid #C8A97E; border-radius: 4px;">
+                💡 <strong>Conclusion:</strong> In the quarterly rebalancing scenario, Factor GCN performs "neutral". While it secures the second-highest total return, its volatility metrics remain comparable to the market benchmark (0050.TW), indicating that quarterly updates might be too sparse to fully capture the dynamics of this bull market.
             </p>
 
-            <h3 style="margin-top: 50px; border-bottom: none;">📈 Cumulative Equity Curve</h3>
-            <p style="color: var(--text-light); font-size: 0.9em; margin-top: -10px;">Initial Capital Base = 100</p>
-
             <div class="chart-container">
-                <canvas id="monthlyChart"></canvas>
-            </div>
-            
-            <div class="chart-container" style="margin-top: 50px;">
                 <canvas id="quarterlyChart"></canvas>
+            </div>
+
+            <h4 style="color: var(--accent-red); margin-top: 50px; font-size: 1.2em;">📊 Scenario II: Monthly Rebalancing</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Strategy / Baseline</th>
+                        <th>Performance (Gross Total Return)</th>
+                        <th>Sharpe Ratio Standard Deviation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Market Index (0050.TW)</td><td>3.234</td><td>4.121</td></tr>
+                    <tr><td>Equal Weight (1/N)</td><td>1.704</td><td>3.873</td></tr>
+                    <tr><td>Hierarchical Risk Parity (HRP)</td><td>1.220</td><td>4.345</td></tr>
+                    <tr style="color: var(--accent-red); font-weight: bold;"><td>Factor GCN (Proposed)</td><td>3.833</td><td>3.742</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 15px; font-size: 0.95em; padding: 15px; background: #FFF9E6; border-left: 4px solid #C8A97E; border-radius: 4px;">
+                💡 <strong>Conclusion:</strong> Monthly rebalancing demonstrates significantly superior performance. Factor GCN not only achieves the <strong>highest total return (3.833)</strong> but also successfully minimizes volatility, yielding the lowest Sharpe Ratio Standard Deviation among all models. This confirms that for this market regime, higher-frequency updates allow the GCN to better adapt to market shifts, making it more robust than the quarterly approach.
+            </p>
+
+            <div class="chart-container" style="margin-top: 30px;">
+                <canvas id="monthlyChart"></canvas>
             </div>
         </div>
 
@@ -420,7 +429,7 @@
         <p style="margin: 5px 0 0 0; line-height: 1.6; opacity: 0.95;">Built for ICOML 2026 | Developed solely by Chun-Hao, Wen</p>
     </footer>
 
-    <script>
+   <script>
         function calculateCumulativeNAV(returns) {
             let navs = [100]; 
             let current = 100;
@@ -460,10 +469,10 @@
         };
 
         const datasetConfig = {
-            gcn:  { label: 'Factor GCN', borderColor: '#5A1826', backgroundColor: 'rgba(90, 24, 38, 0.1)', borderWidth: 3, tension: 0.3, pointRadius: 3, fill: true },
+            gcn:  { label: 'Factor GCN', borderColor: '#8D191D', backgroundColor: 'rgba(141, 25, 29, 0.1)', borderWidth: 3, tension: 0.3, pointRadius: 3, fill: true },
             o050: { label: '0050 ETF', borderColor: '#999999', borderWidth: 2, tension: 0.3, pointRadius: 2, borderDash: [5, 5] },
             ew:   { label: 'Equal Weight', borderColor: '#4A90E2', borderWidth: 2, tension: 0.3, pointRadius: 2 },
-            hrp:  { label: 'HRP', borderColor: '#50E3C2', borderWidth: 2, tension: 0.3, pointRadius: 2 }
+            hrp:  { label: 'HRP', borderColor: '#C8A97E', borderWidth: 2, tension: 0.3, pointRadius: 2 }
         };
 
         new Chart(document.getElementById('monthlyChart'), {

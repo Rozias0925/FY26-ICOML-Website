@@ -251,20 +251,26 @@
             header {
                 padding: 40px 15px 60px 15px;
             }
-            /* 調整後的手機版精緻 LOGO 大小 */
-            /* 1. 找到並修改這一段：控制外圍圓圈的大小 */
+
             .logo-container {
-                width: 55px !important;      /* 強制將圓圈寬度縮小到 55px */
-                height: 55px !important;     /* 強制將圓圈高度縮小到 55px */
-                margin: 0 auto 15px auto !important; /* 置中，並縮小下方與標題的間距 */
+                width: auto !important;
+                max-width: 85vw !important; /* 魔法指令：最大寬度絕對不超過手機螢幕的 85% */
+                height: auto !important;    /* 高度自動按比例縮放，不寫死 */
+                margin: 0 auto 15px auto !important;
+                border-radius: 0 !important; /* 解除原本的圓形限制 */
+                border: none !important;     /* 拿掉邊框 */
+                box-shadow: none !important; /* 拿掉陰影 */
+                background-color: transparent !important; /* 去除底色，完美融入背景 */
             }
 
-            /* 2. 務必加上這一段：確保裡面的圖片跟著縮小，絕對不撐破圓圈 */
+            /* 2. 讓圖片完全順從外框的縮放 */
             .logo-container img {
-                width: 70% !important;       /* 讓圖片佔圓圈的 70% */
-                height: 70% !important;
-                object-fit: contain !important; /* 保持原圖比例不變形 */
+                width: 100% !important;
+                height: auto !important;
+                object-fit: contain !important;
+                display: block;
             }
+
             header h1 {
                 font-size: 1.6em;
                 letter-spacing: 2px;

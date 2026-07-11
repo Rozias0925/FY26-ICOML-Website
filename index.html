@@ -70,6 +70,30 @@
             transform: translateY(-1px);
         }
 
+/* 左側專屬 Icon (Logo) 設定 */
+        .nav-logo {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            z-index: 1001; /* 確保不被遮擋 */
+        }
+
+        .nav-logo img {
+            height: 45px; /* 控制 Icon 的大小 */
+            width: 45px;
+            object-fit: cover; /* 確保圖片不變形 */
+            border-radius: 50%; /* 如果你想讓方形圖片變成圓形，可以保留這行；如果本來就是透明背景的 Logo，這行可以刪掉 */
+            border: 1px solid var(--gray-light); /* 輕微的邊框增加質感，不需要也可刪除 */
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo:hover img {
+            transform: scale(1.1); /* 滑鼠游標靠近時會微微放大 */
+        }
+
         header {
             background-color: var(--bg-dark-red);
             color: #FFFFFF;
@@ -316,6 +340,10 @@
 <body>
 
     <nav>
+        <a href="#" class="nav-logo">
+            <img src="icon.png" alt="Rozias Icon">
+        </a>
+
         <a href="#motivation">Motivation</a>
         <a href="#methodology">Methodology</a>
         <a href="#optimization">End-to-End Optimization</a>

@@ -70,28 +70,30 @@
             transform: translateY(-1px);
         }
 
-/* 左側專屬 Icon (Logo) 設定 */
+/* --- 懸浮在右下角的個人 Icon (Logo) --- */
         .nav-logo {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+            position: fixed; /* 關鍵魔法：固定在螢幕視窗上 */
+            bottom: 30px;    /* 距離螢幕底部 30px */
+            right: 30px;     /* 距離螢幕右側 30px */
             display: flex;
             align-items: center;
-            z-index: 1001; /* 確保不被遮擋 */
+            z-index: 9999;   /* 數字開到最大，確保它永遠浮在最頂層，不會被內容蓋住 */
         }
 
         .nav-logo img {
-            height: 45px; /* 控制 Icon 的大小 */
-            width: 45px;
-            object-fit: cover; /* 確保圖片不變形 */
-            border-radius: 50%; /* 如果你想讓方形圖片變成圓形，可以保留這行；如果本來就是透明背景的 Logo，這行可以刪掉 */
-            border: 1px solid var(--gray-light); /* 輕微的邊框增加質感，不需要也可刪除 */
-            transition: transform 0.3s ease;
+            height: 55px;    /* Icon 的大小 */
+            width: 55px;
+            object-fit: cover;
+            border-radius: 50%; /* 讓圖片變成圓形 */
+            border: 2px solid #ffffff; /* 加一圈白邊提升質感 */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15); /* 加上陰影，創造「浮在空中」的立體感 */
+            transition: all 0.3s ease;
         }
 
+        /* 當滑鼠游標靠近時的互動特效 */
         .nav-logo:hover img {
-            transform: scale(1.1); /* 滑鼠游標靠近時會微微放大 */
+            transform: scale(1.1) translateY(-5px); /* 稍微放大並往上浮 */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25); /* 陰影加深 */
         }
 
         header {
@@ -340,9 +342,6 @@
 <body>
 
     <nav>
-        <a href="#" class="nav-logo">
-            <img src="icon.png" alt="Rozias Icon">
-        </a>
 
         <a href="#motivation">Motivation</a>
         <a href="#methodology">Methodology</a>
@@ -561,6 +560,10 @@
         <p style="margin: 5px 0 0 0; line-height: 1.6; opacity: 0.95;">Built for ICOML 2026 | Developed by Chun-Hao, Wen</p>
     </footer>
 
+    <a href="#" class="nav-logo" id="back-to-top">
+        <img src="icon.png" alt="Rozias Icon">
+    </a>
+
    <script>
         function calculateCumulativeNAV(returns) {
             let navs = [100]; 
@@ -634,6 +637,19 @@
             },
             options: { ...chartOptions, plugins: { ...chartOptions.plugins, title: { display: true, text: 'Strategy Comparison - Quarterly Rebalancing' } } }
         });
+
+        // --- 點擊右下角 Icon 絲滑回到頂端 ---
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', function(e) {
+                    e.preventDefault(); // 阻止原本預設的跳轉，避免網址列多出 '#'
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth' // 觸發「刷～」的絲滑滑動效果
+                    });
+                });
+            }
+
     </script>
 
 </body>
